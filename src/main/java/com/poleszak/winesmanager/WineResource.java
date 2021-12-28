@@ -39,6 +39,7 @@ public class WineResource
     public ResponseEntity<Wine> addWine(@RequestBody Wine wine)
     {
         Wine newWine = wineService.addWine(wine);
+        wineService.addWineToFile(wine);
 
         return new ResponseEntity<>(newWine, HttpStatus.CREATED);
     }
