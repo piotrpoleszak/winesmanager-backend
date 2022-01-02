@@ -11,6 +11,7 @@ public class Wine implements Serializable
     @Column(nullable = false, updatable = false)
     private Long id;
     private String name;
+    private String strain;
     private String color;
     private Integer vintage;
     private String taste;
@@ -22,9 +23,10 @@ public class Wine implements Serializable
 
     public Wine() {}
 
-    public Wine(String name, String color, Integer vintage, String taste, String country, Integer rating, String imageURL, String wineCode)
+    public Wine(String name, String strain, String color, Integer vintage, String taste, String country, Integer rating, String imageURL, String wineCode)
     {
         this.name = name;
+        this.strain = strain;
         this.color = color;
         this.vintage = vintage;
         this.taste = taste;
@@ -52,6 +54,16 @@ public class Wine implements Serializable
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public String getStrain()
+    {
+        return strain;
+    }
+
+    public void setStrain(String strain)
+    {
+        this.strain = strain;
     }
 
     public String getColor()
@@ -130,6 +142,7 @@ public class Wine implements Serializable
         return "Wine{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", strain='" + strain + '\'' +
                 ", color='" + color + '\'' +
                 ", vintage=" + vintage +
                 ", taste='" + taste + '\'' +
