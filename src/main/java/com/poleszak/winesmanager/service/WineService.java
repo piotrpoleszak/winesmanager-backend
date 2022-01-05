@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -57,6 +58,7 @@ public class WineService
                 .orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
     }
 
+    @Transactional
     public void deleteWine(Long id)
     {
         wineRepo.deleteWineById(id);
