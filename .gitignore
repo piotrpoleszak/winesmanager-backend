@@ -78,4 +78,4 @@ secrets.yml
 .sts4-cache
 
 ##### Resources #####
-application.properties
+/src/main/java/com/poleszak/winesmanager/db/

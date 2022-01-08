@@ -1,32 +1,37 @@
 package com.poleszak.winesmanager.service;
 
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.poleszak.winesmanager.exception.UserNotFoundException;
 import com.poleszak.winesmanager.model.Wine;
 import com.poleszak.winesmanager.repo.WineRepo;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
 public class WineService
 {
+    @Value("${pathFile}")
+    public String pathFile;
+
+    public String getPathFile()
+    {
+        return pathFile;
+    }
+
+    public void setPathFile(String pathFile)
+    {
+        this.pathFile = pathFile;
+    }
+
     private final WineRepo wineRepo;
 
     @Autowired
@@ -37,6 +42,8 @@ public class WineService
 
     public Wine addWine(Wine wine)
     {
+        wine.setWineCode(UUID.randomUUID().toString());
+
         return wineRepo.save(wine);
     }
 
@@ -69,7 +76,7 @@ public class WineService
         try {
             final String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(wine);
 
-            Files.write(new File("C:\\Users\\poles\\OneDrive\\Pulpit\\Projects\\winesmanager-backend\\src\\main\\java\\com\\poleszak\\winesmanager\\db\\data.json").toPath(), Arrays.asList(json), StandardOpenOption.APPEND);
+            Files.write(new File(pathFile).toPath(), List.of(json), StandardOpenOption.APPEND);
         } catch (IOException e) {
             e.printStackTrace();
         }

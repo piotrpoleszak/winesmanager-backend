@@ -2,7 +2,6 @@ package com.poleszak.winesmanager.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 public class Wine implements Serializable
@@ -24,7 +23,7 @@ public class Wine implements Serializable
 
     public Wine() {}
 
-    public Wine(String name, String strain, String color, Integer vintage, String taste, String country, Integer rating, String imageURL)
+    public Wine(String name, String strain, String color, Integer vintage, String taste, String country, Integer rating, String imageURL, String wineCode)
     {
         this.name = name;
         this.strain = strain;
@@ -34,7 +33,7 @@ public class Wine implements Serializable
         this.country = country;
         this.rating = rating;
         this.imageURL = imageURL;
-        this.wineCode = UUID.randomUUID().toString();
+        this.wineCode = wineCode;
     }
 
     public Long getId()
