@@ -37,8 +37,6 @@ public class WineService
 
     public Wine addWine(Wine wine)
     {
-        wine.setWineCode(UUID.randomUUID().toString());
-
         return wineRepo.save(wine);
     }
 
