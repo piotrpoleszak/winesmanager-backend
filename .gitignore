@@ -79,3 +79,4 @@ secrets.yml
 
 ##### Resources #####
 /src/main/java/com/poleszak/winesmanager/db/
+/src/main/resources/
