@@ -22,16 +22,6 @@ public class WineService
     @Value("${pathFile}")
     public String pathFile;
 
-    public String getPathFile()
-    {
-        return pathFile;
-    }
-
-    public void setPathFile(String pathFile)
-    {
-        this.pathFile = pathFile;
-    }
-
     private final WineRepo wineRepo;
 
     @Autowired
