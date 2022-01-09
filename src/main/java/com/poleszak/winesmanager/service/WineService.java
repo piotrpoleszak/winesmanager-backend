@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,16 +22,6 @@ public class WineService
 {
     @Value("${pathFile}")
     public String pathFile;
-
-    public String getPathFile()
-    {
-        return pathFile;
-    }
-
-    public void setPathFile(String pathFile)
-    {
-        this.pathFile = pathFile;
-    }
 
     private final WineRepo wineRepo;
 
