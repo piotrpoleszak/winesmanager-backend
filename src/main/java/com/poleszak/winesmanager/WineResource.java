@@ -1,18 +1,26 @@
 package com.poleszak.winesmanager;
 
 import com.poleszak.winesmanager.model.Wine;
+import com.poleszak.winesmanager.service.JsonExporter;
 import com.poleszak.winesmanager.service.WineService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/wine")
 public class WineResource
 {
+    @Autowired
+    private JsonExporter jsonExporter;
+
     private final WineService wineService;
 
     public WineResource(WineService wineService)
@@ -59,5 +67,21 @@ public class WineResource
         wineService.deleteWine(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/downloadJson")
+    public ResponseEntity<byte[]> downloadJsonFile() {
+        List<Wine> wines = wineService.findAllWines();
+
+        String wineJsonString = jsonExporter.export(wines);
+
+        byte[] customerJsonBytes = wineJsonString.getBytes();
+
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=wines.json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .contentLength(customerJsonBytes.length)
+                .body(customerJsonBytes);
     }
 }
