@@ -75,13 +75,13 @@ public class WineResource
 
         String wineJsonString = jsonExporter.export(wines);
 
-        byte[] customerJsonBytes = wineJsonString.getBytes();
+        byte[] wineJsonBytes = wineJsonString.getBytes();
 
         return ResponseEntity
                 .ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=wines.json")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=wines.json")
                 .contentType(MediaType.APPLICATION_JSON)
-                .contentLength(customerJsonBytes.length)
-                .body(customerJsonBytes);
+                .contentLength(wineJsonBytes.length)
+                .body(wineJsonBytes);
     }
 }
